@@ -1,0 +1,160 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--WINDOWS-->
+
+    <Style x:Key="WindowsStyle"
+           TargetType="Window">
+        <Setter Property="Background"
+                Value="#9DADD5" />
+    </Style>
+    
+    <!--///////////////////////////////////////////////////////-->
+
+    <!--IMAGE_BUTTONS-->
+
+    <Style x:Key="Button_DownloadList"
+           TargetType="Button">
+        <Setter Property="Height"
+                Value="28" />
+        <Setter Property="Width"
+                Value="28" />
+        <Setter Property="Margin"
+                Value="15,8,0,0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Image>
+                        <Image.Style>
+                            <Style TargetType="Image">
+                                <Setter Property="Source"
+                                        Value="\Resources\Images\Buttons\DownloadList\download.png" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver"
+                                             Value="True">
+                                        <Setter Property="Source"
+                                                Value="\Resources\Images\Buttons\DownloadList\downloadActive.png" />
+                                    </Trigger>
+                                    <Trigger Property="IsEnabled"
+                                             Value="False">
+                                        <Setter Property="Source"
+                                                Value="\Resources\Images\Buttons\DownloadList\download.png" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="Button_Save"
+           TargetType="Button">
+        <Setter Property="Height"
+                Value="28" />
+        <Setter Property="Width"
+                Value="28" />
+        <Setter Property="Margin"
+                Value="15,8,0,0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Image>
+                        <Image.Style>
+                            <Style TargetType="Image">
+                                <Setter Property="Source"
+                                        Value="\Resources\Images\Buttons\Save\save.png" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver"
+                                             Value="True">
+                                        <Setter Property="Source"
+                                                Value="\Resources\Images\Buttons\Save\saveActive.png" />
+                                    </Trigger>
+                                    <Trigger Property="IsEnabled"
+                                             Value="False">
+                                        <Setter Property="Source"
+                                                Value="\Resources\Images\Buttons\Save\save.png" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="Button_Search"
+           TargetType="Button">
+        <Setter Property="Height"
+                Value="28" />
+        <Setter Property="Width"
+                Value="28" />
+        <Setter Property="Margin"
+                Value="15,8,0,0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Image>
+                        <Image.Style>
+                            <Style TargetType="Image">
+                                <Setter Property="Source"
+                                        Value="\Resources\Images\Buttons\Search\search.png" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver"
+                                             Value="True">
+                                        <Setter Property="Source"
+                                                Value="\Resources\Images\Buttons\Search\searchActive.png" />
+                                    </Trigger>
+                                    <Trigger Property="IsEnabled"
+                                             Value="False">
+                                        <Setter Property="Source"
+                                                Value="\Resources\Images\Buttons\Search\search.png" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="Button_Trash"
+           TargetType="Button">
+        <Setter Property="Height"
+                Value="28" />
+        <Setter Property="Width"
+                Value="28" />
+        <Setter Property="Margin"
+                Value="15,8,0,0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Image>
+                        <Image.Style>
+                            <Style TargetType="Image">
+                                <Setter Property="Source"
+                                        Value="\Resources\Images\Buttons\Trash\trash.png" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver"
+                                             Value="True">
+                                        <Setter Property="Source"
+                                                Value="\Resources\Images\Buttons\Trash\trashActive.png" />
+                                    </Trigger>
+                                    <Trigger Property="IsEnabled"
+                                             Value="False">
+                                        <Setter Property="Source"
+                                                Value="\Resources\Images\Buttons\Trash\trash.png" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

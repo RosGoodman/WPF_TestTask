@@ -6,10 +6,28 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>MainIcon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <None Remove="Resources\Images\Buttons\DownloadList\download.png" />
+    <None Remove="Resources\Images\Buttons\DownloadList\downloadActive.png" />
+    <None Remove="Resources\Images\Buttons\Save\save.png" />
+    <None Remove="Resources\Images\Buttons\Save\saveActive.png" />
+    <None Remove="Resources\Images\Buttons\Search\search.png" />
+    <None Remove="Resources\Images\Buttons\Search\searchActive.png" />
+    <None Remove="Resources\Images\Buttons\Trash\trash.png" />
+    <None Remove="Resources\Images\Buttons\Trash\trashActive.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="MainIcon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\Images\Screensaver\" />
     <Folder Include="Views\Controls\" />
   </ItemGroup>
 
@@ -20,6 +38,33 @@
   <ItemGroup>
     <ProjectReference Include="..\Logger\Logger.csproj" />
     <ProjectReference Include="..\WPF_TestTask.ViewModel\WPF_TestTask.ViewModel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\Buttons\DownloadList\download.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Buttons\DownloadList\downloadActive.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Buttons\Save\save.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Buttons\Save\saveActive.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Buttons\Search\search.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Buttons\Search\searchActive.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Buttons\Trash\trash.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Buttons\Trash\trashActive.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

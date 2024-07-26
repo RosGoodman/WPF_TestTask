@@ -5,8 +5,63 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_TestTask"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="{Binding Title, Mode=OneTime}"
+        Height="900"
+        Width="1400"
+        Style="{StaticResource WindowsStyle}">
     <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="34" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal"
+                    DockPanel.Dock="Top">
+
+            <Button x:Name="searchButton"
+                    Margin="20,5,0,0"
+                    Style="{StaticResource Button_Search}"
+                    Command="{Binding SearchCommand}">
+                <Button.ToolTip>
+                    <ToolTip Background="#F3DCAC">Поиск.</ToolTip>
+                </Button.ToolTip>
+            </Button>
+
+            <Button x:Name="saveButton"
+                    Margin="20,5,0,0"
+                    Style="{StaticResource Button_Save}"
+                    Command="{Binding SaveCommand}">
+                <Button.ToolTip>
+                    <ToolTip Background="#F3DCAC">Сохранить изменения.</ToolTip>
+                </Button.ToolTip>
+            </Button>
+
+            <Button x:Name="downloadListButton"
+                    Margin="20,5,0,0"
+                    Style="{StaticResource Button_DownloadList}"
+                    Command="{Binding RefreshContractsCommand}">
+                <Button.ToolTip>
+                    <ToolTip Background="#F3DCAC">Загрузить данные из файла.</ToolTip>
+                </Button.ToolTip>
+            </Button>
+
+            <Button x:Name="trashButton"
+                    Margin="20,5,0,0"
+                    Style="{StaticResource Button_Trash}"
+                    Command="{Binding DeleteSelectedCommand}">
+                <Button.ToolTip>
+                    <ToolTip Background="#F3DCAC">Удалить выбранный элемент.</ToolTip>
+                </Button.ToolTip>
+            </Button>
+            
+        </StackPanel>
 
     </Grid>
 </Window>
