@@ -16,6 +16,7 @@
     <ProjectReference Include="..\DataReaderService\DataReaderService.csproj" />
     <ProjectReference Include="..\Logger\Logger.csproj" />
     <ProjectReference Include="..\WPF_TestTask.DAL\WPF_TestTask.DAL.csproj" />
+    <ProjectReference Include="..\WPF_TestTask.Model\WPF_TestTask.Model.csproj" />
   </ItemGroup>
 
 </Project>

@@ -9,6 +9,7 @@ using WPF_TestTask.DAL.Repositories;
 using WPF_TestTask.Model.Models;
 using WPF_TestTask.Model.ModelsDto;
 using WPF_TestTask.ViewModel.Services;
+using WPF_TestTask.ViewModel.Services.Converters;
 using WPF_TestTask.ViewModel.Services.IntermediateLogics.MapperService;
 
 namespace WPF_TestTask.ViewModel.ViewModels.Windows;
@@ -116,7 +117,7 @@ public class MainWindowVM : NotifyPropertyChanged, INotifyPropertyChanged
     /// <summary>
     /// Выполнить команду "Поиск".
     /// </summary>
-    /// <param name="param"></param>
+    /// <param name="param"> Параметр. </param>
     private void SearchCommand_Execute(object param)
     {
         _logger.Information($"{nameof(MainWindowVM)} >>> {nameof(SearchCommand_Execute)}. Поиск.");
@@ -133,7 +134,7 @@ public class MainWindowVM : NotifyPropertyChanged, INotifyPropertyChanged
     /// <summary>
     /// Выполнить команду "Загрузить данные из файла".
     /// </summary>
-    /// <param name="param"></param>
+    /// <param name="param"> Параметр. </param>
     private void DownloadCommand_Execute(object param)
     {
         _logger.Information($"{nameof(MainWindowVM)} >>> {nameof(DownloadCommand_Execute)}. Загрузить данные из файла.");
@@ -146,6 +147,11 @@ public class MainWindowVM : NotifyPropertyChanged, INotifyPropertyChanged
 
         if(!_dataReader.TryReadData(filePath, fileinfo.Extension, out string[,] data))
             return;
+
+        var convertedEntities = Indexator.SetIndexes(
+            ElementsConverter.Convert(data));
+
+        Items = new(convertedEntities);
     }
 
 
@@ -153,7 +159,7 @@ public class MainWindowVM : NotifyPropertyChanged, INotifyPropertyChanged
     /// <summary>
     /// Выполнить команду "Сохранить изменения".
     /// </summary>
-    /// <param name="param"></param>
+    /// <param name="param"> Параметр. </param>
     private void SaveCommand_Execute(object param)
     {
         _logger.Information($"{nameof(MainWindowVM)} >>> {nameof(SaveCommand_Execute)}. Сохранить изменения.");
@@ -176,7 +182,7 @@ public class MainWindowVM : NotifyPropertyChanged, INotifyPropertyChanged
     /// <summary>
     /// Выполнить команду "Удалить выбранный элемент".
     /// </summary>
-    /// <param name="param"></param>
+    /// <param name="param"> Параметр. </param>
     private void DeleteSelectedCommand_Execute(object param)
     {
         _logger.Information($"{nameof(MainWindowVM)} >>> {nameof(DeleteSelectedCommand_Execute)}. Удалить выбранный элемент.");

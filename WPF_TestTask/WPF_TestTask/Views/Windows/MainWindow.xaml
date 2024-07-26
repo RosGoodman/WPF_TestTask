@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_TestTask"
+        xml:lang="ru-RU"
         mc:Ignorable="d"
         Title="{Binding Title, Mode=OneTime}"
         Height="900"
@@ -98,44 +99,38 @@
                             <DataGridTextColumn Header="Наименование"
                                                 Width="100"
                                                 MinWidth="30"
-                                                IsReadOnly="True"
-                                                ElementStyle="{StaticResource CenterAligned}"
-                                                Binding="{Binding Index, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                ElementStyle="{StaticResource LeftAligned}"
+                                                Binding="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                             <!--Дистанция-->
                             <DataGridTextColumn Header="Дистанция"
                                                 Width="100"
                                                 MinWidth="30"
-                                                IsReadOnly="True"
                                                 ElementStyle="{StaticResource CenterAligned}"
-                                                Binding="{Binding Index, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                Binding="{Binding Distance, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
                             <!--Угол-->
                             <DataGridTextColumn Header="Угол"
                                                 Width="100"
                                                 MinWidth="30"
-                                                IsReadOnly="True"
                                                 ElementStyle="{StaticResource CenterAligned}"
-                                                Binding="{Binding Index, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                Binding="{Binding Angle, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
                             <!--Ширина-->
                             <DataGridTextColumn Header="Ширина"
                                                 Width="100"
                                                 MinWidth="30"
-                                                IsReadOnly="True"
                                                 ElementStyle="{StaticResource CenterAligned}"
-                                                Binding="{Binding Index, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                Binding="{Binding Width, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
                             <!--Высота-->
                             <DataGridTextColumn Header="Высота"
                                                 Width="100"
                                                 MinWidth="30"
-                                                IsReadOnly="True"
                                                 ElementStyle="{StaticResource CenterAligned}"
-                                                Binding="{Binding Index, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                Binding="{Binding Height, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
                             <!--Наличие дефекта-->
                             <DataGridTextColumn Header="Наличие дефекта"
                                                 Width="110"
                                                 MinWidth="30"
-                                                IsReadOnly="True"
                                                 ElementStyle="{StaticResource CenterAligned}"
-                                                Binding="{Binding Index, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                Binding="{Binding IsDefect, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
                         </DataGrid.Columns>
                     </DataGrid>
 
