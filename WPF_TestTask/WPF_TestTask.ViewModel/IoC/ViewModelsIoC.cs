@@ -1,4 +1,5 @@
-﻿using Ninject;
+﻿using DataReaderService;
+using Ninject;
 using Serilog;
 using WPF_TestTask.DAL.DataContext;
 using WPF_TestTask.DAL.Repositories;
@@ -18,6 +19,12 @@ public class ViewModelsIoC
         BindContext();
         BindRepositories();
         BindViewModels();
+        BindServices();
+    }
+
+    private static void BindServices()
+    {
+        Kernel.Bind<IDataReader>().To<DataReader>().InTransientScope();
     }
 
     private static void BindContext()

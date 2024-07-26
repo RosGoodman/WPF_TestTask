@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using System.Collections.ObjectModel;
 
-namespace WPF_TestTask.ViewModel.IntermediateLogics.MapperService;
+namespace WPF_TestTask.ViewModel.Services.IntermediateLogics.MapperService;
 
 internal static class StandartMapper
 {

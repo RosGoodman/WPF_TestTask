@@ -1,13 +1,15 @@
 ﻿#nullable disable
 
+using DataReaderService;
 using Serilog;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Windows;
+using System.IO;
 using WPF_TestTask.DAL.Repositories;
 using WPF_TestTask.Model.Models;
 using WPF_TestTask.Model.ModelsDto;
-using WPF_TestTask.ViewModel.IntermediateLogics.MapperService;
+using WPF_TestTask.ViewModel.Services;
+using WPF_TestTask.ViewModel.Services.IntermediateLogics.MapperService;
 
 namespace WPF_TestTask.ViewModel.ViewModels.Windows;
 
@@ -21,6 +23,7 @@ public class MainWindowVM : NotifyPropertyChanged, INotifyPropertyChanged
 
     private readonly ILogger _logger;
     private readonly IElementRepository _elementRepository;
+    private readonly IDataReader _dataReader;
     private ObservableCollection<ElementDto> _items = new();
     private ElementDto _selectedItem;
 
@@ -90,10 +93,12 @@ public class MainWindowVM : NotifyPropertyChanged, INotifyPropertyChanged
 
     /// <summary> Ctor. </summary>
     public MainWindowVM(ILogger logger,
-        IElementRepository elementRepository)
+        IElementRepository elementRepository,
+        IDataReader dataReader)
     {
         _logger = logger;
         _elementRepository = elementRepository;
+        _dataReader = dataReader;
         _logger.Information($"Логгер встроен в {nameof(MainWindowVM)}");
 
         SearchCommand = new RelayCommand(SearchCommand_Execute);
@@ -132,6 +137,15 @@ public class MainWindowVM : NotifyPropertyChanged, INotifyPropertyChanged
     private void DownloadCommand_Execute(object param)
     {
         _logger.Information($"{nameof(MainWindowVM)} >>> {nameof(DownloadCommand_Execute)}. Загрузить данные из файла.");
+
+        var filePath = FileDialog.OpenFileDialog();
+        if(filePath == string.Empty)
+            return;
+
+        var fileinfo = new FileInfo(filePath);
+
+        if(!_dataReader.TryReadData(filePath, fileinfo.Extension, out string[,] data))
+            return;
     }
 
 
