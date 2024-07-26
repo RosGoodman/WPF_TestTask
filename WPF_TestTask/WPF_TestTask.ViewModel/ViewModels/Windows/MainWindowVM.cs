@@ -14,7 +14,7 @@ using WPF_TestTask.ViewModel.Services.IntermediateLogics.MapperService;
 
 namespace WPF_TestTask.ViewModel.ViewModels.Windows;
 
-/// <summary>  </summary>
+/// <summary> MainWindow view model. </summary>
 public class MainWindowVM : NotifyPropertyChanged, INotifyPropertyChanged
 {
     public delegate void NeedCloseApp();
@@ -163,6 +163,8 @@ public class MainWindowVM : NotifyPropertyChanged, INotifyPropertyChanged
     private void SaveCommand_Execute(object param)
     {
         _logger.Information($"{nameof(MainWindowVM)} >>> {nameof(SaveCommand_Execute)}. Сохранить изменения.");
+
+
     }
 
 
