@@ -9,6 +9,64 @@
                 Value="#9DADD5" />
     </Style>
     
+    <!--datagrid-->
+    
+    <Style TargetType="DataGrid"
+           x:Key="DataGridStyle">
+        <Setter Property="Background"
+                Value="#FFEEF9EB" />
+        <Setter Property="AutoGenerateColumns"
+                Value="False" />
+        <Setter Property="CanUserAddRows"
+                Value="False" />
+        <Setter Property="Margin"
+                Value="4" />
+        <Setter Property="MinHeight"
+                Value="100" />
+    </Style>
+
+    <!--textblock-->
+
+    <Style TargetType="TextBlock"
+           x:Key="TextBlockStyle">
+        <Setter Property="FontSize"
+                Value="13" />
+        <Setter Property="TextAlignment"
+                Value="Center" />
+        <Setter Property="FontFamily"
+                Value="Fonts/#Roboto Light" />
+        <Setter Property="VerticalAlignment"
+                Value="Center" />
+    </Style>
+
+    <Style x:Key="CenterAligned"
+           TargetType="TextBlock"
+           BasedOn="{StaticResource TextBlockStyle}">
+        <Setter Property="HorizontalAlignment"
+                Value="Center" />
+    </Style>
+
+    <Style x:Key="StretchAligned"
+           TargetType="TextBlock"
+           BasedOn="{StaticResource TextBlockStyle}">
+        <Setter Property="HorizontalAlignment"
+                Value="Stretch" />
+    </Style>
+
+    <Style x:Key="RightAligned"
+           TargetType="TextBlock"
+           BasedOn="{StaticResource TextBlockStyle}">
+        <Setter Property="TextAlignment"
+                Value="Right" />
+    </Style>
+
+    <Style x:Key="LeftAligned"
+           TargetType="TextBlock"
+           BasedOn="{StaticResource TextBlockStyle}">
+        <Setter Property="TextAlignment"
+                Value="Left" />
+    </Style>
+
     <!--///////////////////////////////////////////////////////-->
 
     <!--IMAGE_BUTTONS-->

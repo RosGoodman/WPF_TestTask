@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF_TestTask", "WPF_TestTask\WPF_TestTask.csproj", "{3DE2C72E-8E9D-4E4B-BF0E-FB3326B636D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPF_TestTask", "WPF_TestTask\WPF_TestTask.csproj", "{3DE2C72E-8E9D-4E4B-BF0E-FB3326B636D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF_TestTask.ViewModel", "WPF_TestTask.ViewModel\WPF_TestTask.ViewModel.csproj", "{0A718E04-117B-4EA9-A850-F33F4277FD8D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPF_TestTask.ViewModel", "WPF_TestTask.ViewModel\WPF_TestTask.ViewModel.csproj", "{0A718E04-117B-4EA9-A850-F33F4277FD8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF_TestTask.Model", "WPF_TestTask.Model\WPF_TestTask.Model.csproj", "{B63CEEA5-59FB-4126-BE1B-18E7CCD5F9FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPF_TestTask.Model", "WPF_TestTask.Model\WPF_TestTask.Model.csproj", "{B63CEEA5-59FB-4126-BE1B-18E7CCD5F9FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF_TestTask.DAL", "WPF_TestTask.DAL\WPF_TestTask.DAL.csproj", "{B0AD3339-BD0B-4971-A43E-4333BEBC1FDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPF_TestTask.DAL", "WPF_TestTask.DAL\WPF_TestTask.DAL.csproj", "{B0AD3339-BD0B-4971-A43E-4333BEBC1FDB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{501093AA-D0EF-4B8A-B522-2A686900AB36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "Logger\Logger.csproj", "{6E818ED9-5CA8-4B03-B44F-B4459003FC9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logger", "Logger\Logger.csproj", "{6E818ED9-5CA8-4B03-B44F-B4459003FC9F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

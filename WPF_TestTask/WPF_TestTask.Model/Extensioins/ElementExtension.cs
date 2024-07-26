@@ -20,4 +20,12 @@ public static class ElementExtension
         entity.Height = sender.Height;
         entity.IsDefect = sender.IsDefect;
     }
+
+    public static bool IsValid(this Element entity)
+    {
+        if (entity is null || entity.Name == string.Empty)
+            return false;
+
+        return true;
+    }
 }

@@ -1,8 +1,13 @@
 ﻿#nullable disable
 
 using Serilog;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
+using WPF_TestTask.DAL.Repositories;
+using WPF_TestTask.Model.Models;
+using WPF_TestTask.Model.ModelsDto;
+using WPF_TestTask.ViewModel.IntermediateLogics.MapperService;
 
 namespace WPF_TestTask.ViewModel.ViewModels.Windows;
 
@@ -15,6 +20,9 @@ public class MainWindowVM : NotifyPropertyChanged, INotifyPropertyChanged
     #region Feilds
 
     private readonly ILogger _logger;
+    private readonly IElementRepository _elementRepository;
+    private ObservableCollection<ElementDto> _items = new();
+    private ElementDto _selectedItem;
 
     #endregion
 
@@ -23,6 +31,32 @@ public class MainWindowVM : NotifyPropertyChanged, INotifyPropertyChanged
     #region Properties
 
     public string Title { get; set; } = "Тестовая программа";
+
+    /// <summary>
+    /// Коллекция элементов.
+    /// </summary>
+    public ObservableCollection<ElementDto> Items
+    {
+        get => new(_items.Where(e => !e.IsDeleted));
+        set
+        {
+            _items = value;
+            OnPropertyChanged(nameof(Items));
+        }
+    }
+
+    /// <summary>
+    /// Выбранный элемент.
+    /// </summary>
+    public ElementDto SelectedItem
+    {
+        get => _selectedItem;
+        set
+        {
+            _selectedItem = value;
+            OnPropertyChanged(nameof(SelectedItem));
+        }
+    }
 
     #endregion
 
@@ -55,9 +89,11 @@ public class MainWindowVM : NotifyPropertyChanged, INotifyPropertyChanged
     /////////////////////////////////////////////////////////////////////////////////
 
     /// <summary> Ctor. </summary>
-    public MainWindowVM(ILogger logger)
+    public MainWindowVM(ILogger logger,
+        IElementRepository elementRepository)
     {
         _logger = logger;
+        _elementRepository = elementRepository;
         _logger.Information($"Логгер встроен в {nameof(MainWindowVM)}");
 
         SearchCommand = new RelayCommand(SearchCommand_Execute);
@@ -78,7 +114,13 @@ public class MainWindowVM : NotifyPropertyChanged, INotifyPropertyChanged
     /// <param name="param"></param>
     private void SearchCommand_Execute(object param)
     {
-        _logger.Debug($"{nameof(MainWindowVM)} >>> {nameof(SearchCommand_Execute)}. Поиск.");
+        _logger.Information($"{nameof(MainWindowVM)} >>> {nameof(SearchCommand_Execute)}. Поиск.");
+
+        var entitiesDb = _elementRepository.GetAll();
+        if (entitiesDb is null || entitiesDb.Count() == 0)
+            Items = new();
+
+        Items = new(StandartMapper.Map<Element, ElementDto>(entitiesDb));
     }
 
 
@@ -89,7 +131,7 @@ public class MainWindowVM : NotifyPropertyChanged, INotifyPropertyChanged
     /// <param name="param"></param>
     private void DownloadCommand_Execute(object param)
     {
-        _logger.Debug($"{nameof(MainWindowVM)} >>> {nameof(DownloadCommand_Execute)}. Загрузить данные из файла.");
+        _logger.Information($"{nameof(MainWindowVM)} >>> {nameof(DownloadCommand_Execute)}. Загрузить данные из файла.");
     }
 
 
@@ -100,7 +142,7 @@ public class MainWindowVM : NotifyPropertyChanged, INotifyPropertyChanged
     /// <param name="param"></param>
     private void SaveCommand_Execute(object param)
     {
-        _logger.Debug($"{nameof(MainWindowVM)} >>> {nameof(SaveCommand_Execute)}. Сохранить изменения.");
+        _logger.Information($"{nameof(MainWindowVM)} >>> {nameof(SaveCommand_Execute)}. Сохранить изменения.");
     }
 
 
@@ -110,7 +152,12 @@ public class MainWindowVM : NotifyPropertyChanged, INotifyPropertyChanged
     /// </summary>
     /// <param name="param"> Параметр. </param>
     /// <returns> Результат операции. </returns>
-    private bool DeleteSelectedCommand_CanExecute(object param) => true;
+    private bool DeleteSelectedCommand_CanExecute(object param)
+    {
+        if(_selectedItem is null)
+            return false;
+        return true;
+    }
 
     /// <summary>
     /// Выполнить команду "Удалить выбранный элемент".
@@ -118,7 +165,10 @@ public class MainWindowVM : NotifyPropertyChanged, INotifyPropertyChanged
     /// <param name="param"></param>
     private void DeleteSelectedCommand_Execute(object param)
     {
-        _logger.Debug($"{nameof(MainWindowVM)} >>> {nameof(DeleteSelectedCommand_Execute)}. Удалить выбранный элемент.");
+        _logger.Information($"{nameof(MainWindowVM)} >>> {nameof(DeleteSelectedCommand_Execute)}. Удалить выбранный элемент.");
+
+        SelectedItem.IsDeleted = true;
+        OnPropertyChanged(nameof(Items));
     }
 
 
