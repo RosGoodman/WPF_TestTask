@@ -18,7 +18,7 @@ public class Element : BaseModel
     public string Name { get; set; }
 
     /// <summary>
-    /// Дистанция (м).
+    /// Расстояние (м).
     /// </summary>
     public float Distance { get; set; }
 
@@ -38,7 +38,7 @@ public class Element : BaseModel
     public float Height { get; set; }
 
     /// <summary>
-    /// Состояние детали (наличие дефектов).
+    /// Является дефектом.
     /// </summary>
     public bool IsDefect { get; set; }
 }

@@ -47,6 +47,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="ScottPlot.WPF" Version="5.0.36" />
     <PackageReference Include="Serilog" Version="4.0.1" />
   </ItemGroup>
 

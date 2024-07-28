@@ -1,10 +1,16 @@
 ﻿#nullable disable
 
+using BitmapCreatorService;
 using DataReaderService;
 using Serilog;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Drawing;
 using System.IO;
+using System.Windows.Interop;
+using System.Windows.Media.Imaging;
+using System.Windows.Media;
+using System.Windows;
 using WPF_TestTask.DAL.DataContext;
 using WPF_TestTask.DAL.Repositories;
 using WPF_TestTask.Model.Models;
@@ -29,8 +35,10 @@ public class MainWindowVM : NotifyPropertyChanged, INotifyPropertyChanged
     private readonly IContextDB _contextDB;
     private readonly IDataReader _dataReader;
     private readonly IMessageBoxVM _messageBoxVM;
+
     private ObservableCollection<ElementDto> _items = new();
     private ElementDto _selectedItem;
+    private ImageSource _image;
 
     #endregion
 
@@ -61,10 +69,25 @@ public class MainWindowVM : NotifyPropertyChanged, INotifyPropertyChanged
         get => _selectedItem;
         set
         {
+            if(_selectedItem == value) return;
             _selectedItem = value;
             OnPropertyChanged(nameof(SelectedItem));
+            CreateImage();
         }
     }
+
+    public ImageSource Image
+    {
+        get => _image;
+        private set
+        {
+            _image = value;
+            OnPropertyChanged(nameof(Image));
+        }
+    }
+
+    public static double[] DataX { get; private set; } = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
+    public static double[] DataY { get; private set; } = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
 
     #endregion
 
@@ -377,6 +400,25 @@ public class MainWindowVM : NotifyPropertyChanged, INotifyPropertyChanged
     }
 
     #endregion
+
+    private void CreateImage()
+    {
+        var bitmapCreator = new BitmapCreator();
+        Image = ImageSourceFromBitmap(bitmapCreator.Create(20, 12));
+    }
+
+    public ImageSource ImageSourceFromBitmap(Bitmap bmp)
+    {
+        var handle = bmp.GetHbitmap();
+        try
+        {
+            return Imaging.CreateBitmapSourceFromHBitmap(handle, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+    }
 
     #endregion
 }

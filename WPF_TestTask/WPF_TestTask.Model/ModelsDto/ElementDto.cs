@@ -1,5 +1,7 @@
 ﻿#nullable disable
 
+using System.ComponentModel;
+
 namespace WPF_TestTask.Model.ModelsDto;
 
 /// <summary>
@@ -31,6 +33,7 @@ public class ElementDto : BaseModelDto
     /// <summary>
     /// Наименование.
     /// </summary>
+    [DisplayName("Наименование")]
     public string Name
     {
         get => _name;
@@ -43,8 +46,10 @@ public class ElementDto : BaseModelDto
     }
 
     /// <summary>
-    /// Дистанция (м).
+    /// Расстояние (м).
     /// </summary>
+
+    [DisplayName("Расстояние")]
     public float Distance
     {
         get => _distance;
@@ -59,6 +64,8 @@ public class ElementDto : BaseModelDto
     /// <summary>
     /// Угол (ч).
     /// </summary>
+
+    [DisplayName("Угол")]
     public float Angle
     {
         get => _angle;
@@ -73,6 +80,8 @@ public class ElementDto : BaseModelDto
     /// <summary>
     /// Ширина детали.
     /// </summary>
+
+    [DisplayName("Ширина")]
     public float Width
     {
         get => _width;
@@ -87,6 +96,8 @@ public class ElementDto : BaseModelDto
     /// <summary>
     /// Высота детали.
     /// </summary>
+
+    [DisplayName("Высота")]
     public float Height
     {
         get => _height;
@@ -99,8 +110,10 @@ public class ElementDto : BaseModelDto
     }
 
     /// <summary>
-    /// Состояние детали (наличие дефектов).
+    /// Является дефектом.
     /// </summary>
+
+    [DisplayName("Является дефектом")]
     public bool IsDefect
     {
         get => _isDefect;

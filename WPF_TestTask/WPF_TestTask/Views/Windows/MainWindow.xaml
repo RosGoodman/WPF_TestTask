@@ -3,24 +3,32 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WPF_TestTask"
+        xmlns:local="clr-namespace:WPF_TestTask" 
+        xmlns:converter="clr-namespace:WPF_TestTask.Converters"
+        xmlns:ScottPlot="clr-namespace:ScottPlot.WPF;assembly=ScottPlot.WPF"
         xml:lang="ru-RU"
         mc:Ignorable="d"
         Title="{Binding Title, Mode=OneTime}"
         Height="900"
         Width="1400"
         Style="{StaticResource WindowsStyle}">
+
+    <Window.Resources>
+        <converter:TrueFalseConverter x:Key="trueFalseConverter" />
+        <converter:ScaleConverter x:Key="scaleConverter" />
+    </Window.Resources>
+    
     <Grid>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" x:Name="col_0"/>
+            <ColumnDefinition Width="*" x:Name="col_1"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="40" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="200" />
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="200"/>
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal"
@@ -62,93 +70,109 @@
                     <ToolTip Background="#F3DCAC">Удалить выбранный элемент.</ToolTip>
                 </Button.ToolTip>
             </Button>
-            
+
+
         </StackPanel>
+        
+        <DockPanel VerticalAlignment="Stretch"
+                   HorizontalAlignment="Stretch"
+                   FlowDirection="LeftToRight"
+                   Grid.Row="1"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="2"
+                   Grid.RowSpan="2"
+                   Margin="4"
+                   x:Name="dockPanel_1">
 
-        <StackPanel Orientation="Vertical"
-                    Grid.Row="1"
-                    Grid.ColumnSpan="2"
-                    Grid.RowSpan="2">
-            
-            <Separator Margin="10,5,10,0"
-                       VerticalAlignment="Top"
-                       Background="#2B1767"
-                       Height="3" />
+            <Separator Margin="5,5,5,0"
+                        DockPanel.Dock="Top"
+                    Background="#2B1767"
+                    Height="3" />
 
-            <StackPanel Orientation="Horizontal">
-                
-                
-                <StackPanel Orientation="Vertical"
-                            Grid.Column="0"
-                            Grid.ColumnSpan="2"
-                            Margin="4">
+            <DataGrid ItemsSource="{Binding Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      Style="{StaticResource DataGridStyle}"
+                      Width="{Binding ElementName=dockPanel_1, Path=ActualWidth, Mode=OneWay, Converter={StaticResource scaleConverter}, ConverterParameter='0,5'}"
+                      MinWidth="200"
+                      HorizontalScrollBarVisibility="Auto"
+                      VerticalScrollBarVisibility="Visible"
+                      VerticalAlignment="Stretch"
+                      DockPanel.Dock="Left">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header=""
+                                        Width="30"
+                                        MinWidth="30"
+                                        IsReadOnly="True"
+                                        ElementStyle="{StaticResource CenterAligned}"
+                                        Binding="{Binding Index, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <!--Наименование-->
+                    <DataGridTextColumn Header="Наименование"
+                                        Width="100"
+                                        MinWidth="30"
+                                        ElementStyle="{StaticResource LeftAligned}"
+                                        Binding="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <!--Расстояние-->
+                    <DataGridTextColumn Header="Расстояние"
+                                        Width="100"
+                                        MinWidth="30"
+                                        ElementStyle="{StaticResource CenterAligned}"
+                                        Binding="{Binding Distance, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                    <!--Угол-->
+                    <DataGridTextColumn Header="Угол"
+                                        Width="100"
+                                        MinWidth="30"
+                                        ElementStyle="{StaticResource CenterAligned}"
+                                        Binding="{Binding Angle, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                    <!--Ширина-->
+                    <DataGridTextColumn Header="Ширина"
+                                        Width="100"
+                                        MinWidth="30"
+                                        ElementStyle="{StaticResource CenterAligned}"
+                                        Binding="{Binding Width, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                    <!--Высота-->
+                    <DataGridTextColumn Header="Высота"
+                                        Width="100"
+                                        MinWidth="30"
+                                        ElementStyle="{StaticResource CenterAligned}"
+                                        Binding="{Binding Height, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                    <!--Является дефектом-->
+                    <DataGridTextColumn Header="Является дефектом"
+                                        Width="120"
+                                        MinWidth="30"
+                                        ElementStyle="{StaticResource CenterAligned}"
+                                        Binding="{Binding IsDefect, Mode=TwoWay, UpdateSourceTrigger=LostFocus, Converter={StaticResource trueFalseConverter}}" />
+                </DataGrid.Columns>
+            </DataGrid>
 
-                    <DataGrid ItemsSource="{Binding Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                              SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                              Style="{StaticResource DataGridStyle}"
-                              Grid.Row="1"
-                              Grid.RowSpan="1">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header=""
-                                                Width="30"
-                                                MinWidth="30"
-                                                IsReadOnly="True"
-                                                ElementStyle="{StaticResource CenterAligned}"
-                                                Binding="{Binding Index, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-                            <!--Наименование-->
-                            <DataGridTextColumn Header="Наименование"
-                                                Width="100"
-                                                MinWidth="30"
-                                                ElementStyle="{StaticResource LeftAligned}"
-                                                Binding="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                            <!--Дистанция-->
-                            <DataGridTextColumn Header="Дистанция"
-                                                Width="100"
-                                                MinWidth="30"
-                                                ElementStyle="{StaticResource CenterAligned}"
-                                                Binding="{Binding Distance, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
-                            <!--Угол-->
-                            <DataGridTextColumn Header="Угол"
-                                                Width="100"
-                                                MinWidth="30"
-                                                ElementStyle="{StaticResource CenterAligned}"
-                                                Binding="{Binding Angle, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
-                            <!--Ширина-->
-                            <DataGridTextColumn Header="Ширина"
-                                                Width="100"
-                                                MinWidth="30"
-                                                ElementStyle="{StaticResource CenterAligned}"
-                                                Binding="{Binding Width, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
-                            <!--Высота-->
-                            <DataGridTextColumn Header="Высота"
-                                                Width="100"
-                                                MinWidth="30"
-                                                ElementStyle="{StaticResource CenterAligned}"
-                                                Binding="{Binding Height, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
-                            <!--Наличие дефекта-->
-                            <DataGridTextColumn Header="Наличие дефекта"
-                                                Width="110"
-                                                MinWidth="30"
-                                                ElementStyle="{StaticResource CenterAligned}"
-                                                Binding="{Binding IsDefect, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
-                        </DataGrid.Columns>
-                    </DataGrid>
+            <DockPanel VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        x:Name="dockPanel_2"
+                       Margin="4">
 
+                <StackPanel VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch"
+                            DockPanel.Dock="Top"
+                            Width="{Binding ElementName=dockPanel_1, Path=ActualWidth, Mode=OneWay, Converter={StaticResource scaleConverter}, ConverterParameter='0,5'}"
+                            Height="{Binding ElementName=dockPanel_2, Path=ActualHeight, Mode=OneWay, Converter={StaticResource scaleConverter}, ConverterParameter='0,8'}">
+                    <Image x:Name="imageControl"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Bottom"
+                           Source="{Binding Image, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                           Height="{Binding ElementName=dockPanel_2, Path=ActualHeight, Mode=OneWay, Converter={StaticResource scaleConverter}, ConverterParameter='0,75'}">
+                    </Image>
                 </StackPanel>
-
                 
-                <!--Current Element Info-->
-                <StackPanel Orientation="Vertical"
-                            Grid.Column="0"
-                            Grid.ColumnSpan="1"
-                            Margin="4">
+                
 
-                    
+                <ListBox MinWidth="200"
+                         ItemsSource="{Binding SelectedItemProperties, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                         Width="{Binding ElementName=dockPanel_1, Path=ActualWidth, Mode=OneWay, Converter={StaticResource scaleConverter}, ConverterParameter='0,5'}"
+                         Height="{Binding ElementName=dockPanel_2, Path=ActualHeight, Mode=OneWay, Converter={StaticResource scaleConverter}, ConverterParameter='0,2'}">
 
-                </StackPanel>
-            </StackPanel>
-            
-        </StackPanel>
+                </ListBox>
+            </DockPanel>
+                
+        </DockPanel>
         
     </Grid>
 </Window>
