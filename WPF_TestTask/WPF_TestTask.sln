@@ -15,7 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{50
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logger", "Logger\Logger.csproj", "{6E818ED9-5CA8-4B03-B44F-B4459003FC9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataReaderService", "DataReaderService\DataReaderService.csproj", "{3E1DEF13-79EB-4065-8BB4-0170262C48A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataReaderService", "DataReaderService\DataReaderService.csproj", "{3E1DEF13-79EB-4065-8BB4-0170262C48A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageService", "MessageService\MessageService.csproj", "{C73C6D23-46E4-4B89-A00E-02DC766E2605}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{3E1DEF13-79EB-4065-8BB4-0170262C48A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E1DEF13-79EB-4065-8BB4-0170262C48A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E1DEF13-79EB-4065-8BB4-0170262C48A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C73C6D23-46E4-4B89-A00E-02DC766E2605}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C73C6D23-46E4-4B89-A00E-02DC766E2605}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C73C6D23-46E4-4B89-A00E-02DC766E2605}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C73C6D23-46E4-4B89-A00E-02DC766E2605}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,6 +60,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{6E818ED9-5CA8-4B03-B44F-B4459003FC9F} = {501093AA-D0EF-4B8A-B522-2A686900AB36}
 		{3E1DEF13-79EB-4065-8BB4-0170262C48A6} = {501093AA-D0EF-4B8A-B522-2A686900AB36}
+		{C73C6D23-46E4-4B89-A00E-02DC766E2605} = {501093AA-D0EF-4B8A-B522-2A686900AB36}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D7317EC6-4C4C-40E7-ABEB-4301CC354532}

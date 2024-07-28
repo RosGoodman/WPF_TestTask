@@ -4,6 +4,7 @@ using Serilog;
 using System.Windows;
 using WPF_TestTask.ViewModel.IoC;
 using WPF_TestTask.ViewModel.ViewModels.Windows;
+using WPF_TestTask.Views.Windows.DialogWindows;
 
 namespace WPF_TestTask;
 
@@ -13,7 +14,8 @@ namespace WPF_TestTask;
 public partial class App : Application
 {
     private const string _loggerPath = "\\logs\\log_.txt";
-    private static MainWindowVM _mainWindowVM;
+    private static MainWindowVM? _mainWindowVM;
+    private static MessageBoxView? _messageBoxView;
 
     /// <summary> Кастомный стартап. </summary>
     /// <param name="e"></param>
@@ -27,16 +29,10 @@ public partial class App : Application
 
         LogStarter.CreateLogger(string.Empty, _loggerPath);
 
-        Log.Logger.Information($"Логгер встроен в программу");
+        Log.Logger.Information($"Запуск программы.");
 
         ViewModelsIoC.Setup();
-
-        //AppControlInit.Initialize();
-
-        ////создание дефолтных данных в БД (при необходимости)
-        //var defaultEntityCreator = ViewModelsIoC.Kernel.Get<IDefaultEntityCreator>();
-        //defaultEntityCreator.CreateDefaultEntities();
-
+        _messageBoxView = new MessageBoxView();
 
         Current.MainWindow = new MainWindow();
         _mainWindowVM = ViewModelsIoC.Kernel.Get<MainWindowVM>();

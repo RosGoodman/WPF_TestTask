@@ -4,6 +4,7 @@ using Serilog;
 using WPF_TestTask.DAL.DataContext;
 using WPF_TestTask.DAL.Repositories;
 using WPF_TestTask.ViewModel.ViewModels.Windows;
+using WPF_TestTask.ViewModel.ViewModels.Windows.DialogWindows;
 
 namespace WPF_TestTask.ViewModel.IoC;
 
@@ -29,7 +30,7 @@ public class ViewModelsIoC
 
     private static void BindContext()
     {
-        Kernel.Bind<IContextDB>().To<ContextDB>().InTransientScope();
+        Kernel.Bind<IContextDB>().To<ContextDB>().InSingletonScope();
     }
 
     private static void BindRepositories()
@@ -40,5 +41,6 @@ public class ViewModelsIoC
     private static void BindViewModels()
     {
         Kernel.Bind<MainWindowVM>().ToSelf().InSingletonScope();
+        Kernel.Bind<IMessageBoxVM>().To<MessageBoxVM>().InSingletonScope();
     }
 }

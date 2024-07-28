@@ -18,12 +18,19 @@
     <None Remove="Resources\Images\Buttons\Search\searchActive.png" />
     <None Remove="Resources\Images\Buttons\Trash\trash.png" />
     <None Remove="Resources\Images\Buttons\Trash\trashActive.png" />
+    <None Remove="usersdata.db" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="MainIcon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="usersdata.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
@@ -45,6 +52,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Logger\Logger.csproj" />
+    <ProjectReference Include="..\MessageService\MessageService.csproj" />
     <ProjectReference Include="..\WPF_TestTask.ViewModel\WPF_TestTask.ViewModel.csproj" />
   </ItemGroup>
 

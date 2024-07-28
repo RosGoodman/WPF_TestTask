@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using System.Reflection;
 using WPF_TestTask.Model.Models;
 
@@ -13,19 +14,17 @@ public class ContextDB : DbContext, IContextDB
     public ContextDB(DbContextOptions<ContextDB> options)
         : base(options) { }
 
-    /// <summary> Сохранить изменения. Метод для использования через контейнер. </summary>
+    /// <inheritdoc/>
     public int ContextSaveChanges() => SaveChanges();
 
-    /// <summary> Назначить состояние объекта "модифицируемый". </summary>
-    /// <param name="entity"> Объект для изменения состояния. </param>
+    /// <inheritdoc/>
     public void SetNewEntityState(object entity, EntityState newState) => Entry(entity).State = newState;
 
-    /// <summary>
-    /// Получить состояние объекта.
-    /// </summary>
-    /// <param name="entity"> Экземпляр объекта. </param>
-    /// <returns> Текущее состояние экземпляра объекта. </returns>
+    /// <inheritdoc/>
     public EntityState GetEntityState(object entity) => Entry(entity).State;
+
+    /// <inheritdoc/>
+    public IDbContextTransaction ContextBeginTransaction() => Database.BeginTransaction();
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

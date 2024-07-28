@@ -25,6 +25,24 @@
                 Value="100" />
     </Style>
 
+    <!--TextBox-->
+
+    <Style TargetType="TextBox"
+           x:Key="TextBoxStyle">
+        <Setter Property="FontSize"
+                Value="13" />
+        <Setter Property="Height"
+                Value="23" />
+        <Setter Property="TextAlignment"
+                Value="Center" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
+        <Setter Property="FontFamily"
+                Value="Fonts/#Roboto Light" />
+        <Setter Property="Background"
+                Value="#93CCCF" />
+    </Style>
+
     <!--textblock-->
 
     <Style TargetType="TextBlock"
@@ -214,5 +232,108 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    <!--MessageBoxButtons-->
+
+    <Style x:Key="ButtonStyle"
+       TargetType="Button">
+        <Setter Property="Height"
+            Value="36" />
+        <Setter Property="Width"
+            Value="100" />
+        <Setter Property="Background"
+            Value="#966E1D" />
+    </Style>
+
+    <Style x:Key="BorderStyle"
+           TargetType="Border">
+        <Setter Property="CornerRadius"
+                Value="3" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver"
+                     Value="True">
+                <Setter Property="Background"
+                        Value="#AC915A" />
+            </Trigger>
+            <Trigger Property="IsMouseOver"
+                     Value="False">
+                <Setter Property="Background"
+                        Value="#966E1D" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="ButtonYes"
+        BasedOn="{StaticResource ButtonStyle}"
+        TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock Style="{StaticResource TextBlockStyle}"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center">
+                         Да
+                        </TextBlock>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ButtonNo"
+        BasedOn="{StaticResource ButtonStyle}"
+        TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock Style="{StaticResource TextBlockStyle}"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center">
+                         Нет
+                        </TextBlock>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ButtonOk"
+        BasedOn="{StaticResource ButtonStyle}"
+        TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock Style="{StaticResource TextBlockStyle}"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center">
+                         Ok
+                        </TextBlock>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="ButtonCancel"
+           BasedOn="{StaticResource ButtonStyle}"
+           TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock Style="{StaticResource TextBlockStyle}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                            Отмена
+                        </TextBlock>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 
 </ResourceDictionary>

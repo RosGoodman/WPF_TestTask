@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using WPF_TestTask.Model.Models;
 
 namespace WPF_TestTask.DAL.DataContext;
@@ -17,6 +18,12 @@ public interface IContextDB
     /// <summary> Назначить состояние объекта "модифицируемый". </summary>
     /// <param name="entity"> Объект для изменения состояния. </param>
     void SetNewEntityState(object entity, EntityState newState);
+
+    /// <summary>
+    /// Создать транзакцию. 
+    /// </summary>
+    /// <returns> Контекст транзакции. </returns>
+    IDbContextTransaction ContextBeginTransaction();
 
     /// <summary>
     /// Получить состояние объекта.
