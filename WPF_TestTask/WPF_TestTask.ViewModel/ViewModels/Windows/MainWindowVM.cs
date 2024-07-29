@@ -35,7 +35,7 @@ public class MainWindowVM : NotifyPropertyChanged, INotifyPropertyChanged
     private readonly IContextDB _contextDB;
     private readonly IDataReader _dataReader;
     private readonly IMessageBoxVM _messageBoxVM;
-
+    private readonly IBitmapCreator _bitmapCreator;
     private ObservableCollection<ElementDto> _items = new();
     private ElementDto _selectedItem;
     private ImageSource _image;
@@ -124,13 +124,15 @@ public class MainWindowVM : NotifyPropertyChanged, INotifyPropertyChanged
         IElementRepository elementRepository,
         IContextDB contextDB,
         IDataReader dataReader,
-        IMessageBoxVM messageBoxVM)
+        IMessageBoxVM messageBoxVM,
+        IBitmapCreator bitmapCreator)
     {
         _logger = logger;
         _elementRepository = elementRepository;
         _contextDB = contextDB;
         _dataReader = dataReader;
         _messageBoxVM = messageBoxVM;
+        _bitmapCreator = bitmapCreator;
         _logger.Information($"Логгер встроен в {nameof(MainWindowVM)}");
 
         SearchCommand = new RelayCommand(SearchCommand_Execute);
@@ -403,8 +405,24 @@ public class MainWindowVM : NotifyPropertyChanged, INotifyPropertyChanged
 
     private void CreateImage()
     {
-        var bitmapCreator = new BitmapCreator();
-        Image = ImageSourceFromBitmap(bitmapCreator.Create(20, 12));
+        if(_selectedItem is null)
+        {
+            Image = ImageSourceFromBitmap(_bitmapCreator
+                .CreateAxis(20, 12)
+                .GetBitmap());
+            return;
+        }
+
+        var bitmapAxis = _bitmapCreator
+            .CreateAxis(20, 12)
+            .DrawFigure(BitmapCreatorService.Figures.FiguresEnum.Rectangle,
+                        _selectedItem.Distance,
+                        _selectedItem.Angle,
+                        _selectedItem.Width,
+                        _selectedItem.Height)
+            .GetBitmap();
+
+        Image = ImageSourceFromBitmap(bitmapAxis);
     }
 
     public ImageSource ImageSourceFromBitmap(Bitmap bmp)

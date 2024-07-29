@@ -1,4 +1,5 @@
-﻿using DataReaderService;
+﻿using BitmapCreatorService;
+using DataReaderService;
 using Ninject;
 using Serilog;
 using WPF_TestTask.DAL.DataContext;
@@ -26,6 +27,7 @@ public class ViewModelsIoC
     private static void BindServices()
     {
         Kernel.Bind<IDataReader>().To<DataReader>().InTransientScope();
+        Kernel.Bind<IBitmapCreator>().To<BitmapCreator>().InSingletonScope();
     }
 
     private static void BindContext()
