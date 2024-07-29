@@ -158,7 +158,7 @@
                            HorizontalAlignment="Left"
                            VerticalAlignment="Bottom"
                            Source="{Binding Image, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                           Height="{Binding ElementName=dockPanel_2, Path=ActualHeight, Mode=OneWay, Converter={StaticResource scaleConverter}, ConverterParameter='0,75'}">
+                           Height="{Binding ElementName=dockPanel_2, Path=ActualHeight, Mode=OneWay, Converter={StaticResource scaleConverter}, ConverterParameter='0,6'}">
                     </Image>
                 </StackPanel>
                 

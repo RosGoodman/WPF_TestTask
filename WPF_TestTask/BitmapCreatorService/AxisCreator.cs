@@ -3,54 +3,62 @@ using System.Drawing.Drawing2D;
 
 namespace BitmapCreatorService;
 
-internal class AxisCreator
+internal static class AxisCreator
 {
-    internal void DrawAxis(Bitmap bitmap, int divisionsOX, int divisionsOY)
+    internal static void DrawAxis(Bitmap bitmap, int divisionsOX, int divisionsOY)
     {
         Graphics gfx = Graphics.FromImage(bitmap);
         var pen = new Pen(Color.Black, 3);
 
         DrawOX(gfx, pen, divisionsOX);
         DrawOY(gfx, pen, divisionsOY);
-        
-
-        RectangleF rectf = new RectangleF(70, 90, 90, 50);
-
-        gfx.SmoothingMode = SmoothingMode.AntiAlias;
-        gfx.InterpolationMode = InterpolationMode.HighQualityBicubic;
-        gfx.PixelOffsetMode = PixelOffsetMode.HighQuality;
-        gfx.DrawString("yourText", new Font("Tahoma", 8), Brushes.Black, rectf);
-
-        gfx.Flush();
     }
 
-    private void DrawOX(Graphics gfx, Pen pen, int divisionsOX)
+    private static void DrawOX(Graphics gfx, Pen pen, int divisionsOX)
     {
         //draw OX
-        gfx.DrawLine(pen, BitmapCreator.startOX, BitmapCreator.bitmapSize, BitmapCreator.bitmapSize, BitmapCreator.bitmapSize);
+        gfx.DrawLine(pen, BitmapCreator.startOX, BitmapCreator.startOY, BitmapCreator.endOX, BitmapCreator.startOY);
 
-        int step = BitmapCreator.bitmapSize / divisionsOX;
-        int distance = 0;
+        int step = (BitmapCreator.endOX - BitmapCreator.startOX) / divisionsOX;
+        int distance = BitmapCreator.offsetOX + step;
 
-        for (int i = 1; i < divisionsOX + 2; i++)
+        for (int i = 1; i < divisionsOX + 1; i++)
         {
-            gfx.DrawLine(pen, distance, BitmapCreator.bitmapSize, distance, BitmapCreator.bitmapSize - 10);
+            gfx.DrawLine(pen, distance, BitmapCreator.startOY, distance, BitmapCreator.startOY - 10);
+
+            DrawNumb(gfx, i.ToString(), distance - 10, BitmapCreator.bitmapSize - 15);
+
             distance += step;
         }
     }
 
-    private void DrawOY(Graphics gfx, Pen pen, int divisionsOY)
+    private static void DrawOY(Graphics gfx, Pen pen, int divisionsOY)
     {
         //draw OY
-        gfx.DrawLine(pen, BitmapCreator.startOX, BitmapCreator.startOY, 10, 10);
+        gfx.DrawLine(pen, BitmapCreator.startOX, BitmapCreator.startOY, BitmapCreator.offsetOX, BitmapCreator.offsetOY);
 
-        int step = BitmapCreator.bitmapSize / divisionsOY;
-        int distance = BitmapCreator.bitmapSize;
+        int step = (BitmapCreator.startOY - BitmapCreator.offsetOY) / divisionsOY;
+        int distance = BitmapCreator.startOY - step;
 
-        for (int i = 1; i < divisionsOY + 2; i++)
+        for (int i = 1; i < divisionsOY + 1; i++)
         {
-            gfx.DrawLine(pen, 0, distance, 10, distance);
+            gfx.DrawLine(pen, BitmapCreator.offsetOX, distance, BitmapCreator.offsetOX + 10, distance);
+
+            DrawNumb(gfx, i.ToString(), 0, distance - 5);
+
             distance -= step;
         }
+    }
+
+    private static void DrawNumb(Graphics gfx, string text, float ox, float oy)
+    {
+        RectangleF rectf = new RectangleF(ox, oy, 20, 20);
+
+        gfx.SmoothingMode = SmoothingMode.AntiAlias;
+        gfx.InterpolationMode = InterpolationMode.HighQualityBicubic;
+        gfx.PixelOffsetMode = PixelOffsetMode.HighQuality;
+        gfx.DrawString(text, new Font("Verdana", 8), Brushes.Black, rectf);
+
+        gfx.Flush();
     }
 }
