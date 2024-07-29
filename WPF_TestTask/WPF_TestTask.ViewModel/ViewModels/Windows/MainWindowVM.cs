@@ -19,6 +19,7 @@ using WPF_TestTask.ViewModel.Services;
 using WPF_TestTask.ViewModel.Services.Converters;
 using WPF_TestTask.ViewModel.Services.IntermediateLogics.MapperService;
 using WPF_TestTask.ViewModel.ViewModels.Windows.DialogWindows;
+using System;
 
 namespace WPF_TestTask.ViewModel.ViewModels.Windows;
 
@@ -36,6 +37,8 @@ public class MainWindowVM : NotifyPropertyChanged, INotifyPropertyChanged
     private readonly IDataReader _dataReader;
     private readonly IMessageBoxVM _messageBoxVM;
     private readonly IBitmapCreator _bitmapCreator;
+
+    private ObservableCollection<string> _selectedItemProperties = new();
     private ObservableCollection<ElementDto> _items = new();
     private ElementDto _selectedItem;
     private ImageSource _image;
@@ -46,6 +49,9 @@ public class MainWindowVM : NotifyPropertyChanged, INotifyPropertyChanged
 
     #region Properties
 
+    /// <summary>
+    /// Title.
+    /// </summary>
     public string Title { get; set; } = "Тестовая программа";
 
     /// <summary>
@@ -73,9 +79,13 @@ public class MainWindowVM : NotifyPropertyChanged, INotifyPropertyChanged
             _selectedItem = value;
             OnPropertyChanged(nameof(SelectedItem));
             CreateImage();
+            SetPropertiesColl();
         }
     }
 
+    /// <summary>
+    /// Изображение.
+    /// </summary>
     public ImageSource Image
     {
         get => _image;
@@ -86,8 +96,18 @@ public class MainWindowVM : NotifyPropertyChanged, INotifyPropertyChanged
         }
     }
 
-    public static double[] DataX { get; private set; } = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
-    public static double[] DataY { get; private set; } = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+    /// <summary>
+    /// Список характеристик выбранного элемента.
+    /// </summary>
+    public ObservableCollection<string> SelectedItemProperties
+    {
+        get => _selectedItemProperties;
+        private set
+        {
+            _selectedItemProperties = value;
+            OnPropertyChanged(nameof(SelectedItemProperties));
+        }
+    }
 
     #endregion
 
@@ -403,6 +423,11 @@ public class MainWindowVM : NotifyPropertyChanged, INotifyPropertyChanged
 
     #endregion
 
+    #region Image
+
+    /// <summary>
+    /// Создать изображение для выбранного элемента.
+    /// </summary>
     private void CreateImage()
     {
         if(_selectedItem is null)
@@ -436,6 +461,60 @@ public class MainWindowVM : NotifyPropertyChanged, INotifyPropertyChanged
         {
             return null;
         }
+    }
+
+    #endregion
+
+    /// <summary>
+    /// Назначить отображаемую коллекцию характеристик.
+    /// </summary>
+    private void SetPropertiesColl()
+    {
+        SelectedItemProperties = new();
+
+        if (_selectedItem is null)
+            return;
+
+        Type elementType = typeof(ElementDto);
+
+        //Name
+        var nameProperty = elementType.GetProperty(nameof(ElementDto.Name));
+        var nameDN = DisplayNameReader.GetDisplayName(nameProperty);
+
+        _selectedItemProperties.Add($"{nameDN}: {_selectedItem.Name}");
+
+        //Distance
+        var distanceProperty = elementType.GetProperty(nameof(ElementDto.Distance));
+        var distanceDN = DisplayNameReader.GetDisplayName(distanceProperty);
+
+        _selectedItemProperties.Add($"{distanceDN}: {_selectedItem.Distance}");
+
+        //Angle
+        var angleProperty = elementType.GetProperty(nameof(ElementDto.Angle));
+        var angleDN = DisplayNameReader.GetDisplayName(angleProperty);
+
+        _selectedItemProperties.Add($"{angleDN}: {_selectedItem.Angle}");
+
+        //Width
+        var widthProperty = elementType.GetProperty(nameof(ElementDto.Width));
+        var widthDN = DisplayNameReader.GetDisplayName(widthProperty);
+
+        _selectedItemProperties.Add($"{widthDN}: {_selectedItem.Width}");
+
+        //Height
+        var heightProperty = elementType.GetProperty(nameof(ElementDto.Height));
+        var heightDN = DisplayNameReader.GetDisplayName(heightProperty);
+
+        _selectedItemProperties.Add($"{heightDN}: {_selectedItem.Height}");
+
+        //IsDefect
+        var isDefectProperty = elementType.GetProperty(nameof(ElementDto.IsDefect));
+        var isDefectDN = DisplayNameReader.GetDisplayName(isDefectProperty);
+
+        if(_selectedItem.IsDefect)
+            _selectedItemProperties.Add($"{isDefectDN}: да");
+        else
+            _selectedItemProperties.Add($"{isDefectDN}: нет");
     }
 
     #endregion

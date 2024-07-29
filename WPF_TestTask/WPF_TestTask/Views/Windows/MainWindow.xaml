@@ -166,7 +166,7 @@
 
                 <ListBox MinWidth="200"
                          ItemsSource="{Binding SelectedItemProperties, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                         Width="{Binding ElementName=dockPanel_1, Path=ActualWidth, Mode=OneWay, Converter={StaticResource scaleConverter}, ConverterParameter='0,5'}"
+                         Width="{Binding ElementName=dockPanel_1, Path=ActualWidth, Mode=OneWay, Converter={StaticResource scaleConverter}, ConverterParameter='0,48'}"
                          Height="{Binding ElementName=dockPanel_2, Path=ActualHeight, Mode=OneWay, Converter={StaticResource scaleConverter}, ConverterParameter='0,2'}">
 
                 </ListBox>
